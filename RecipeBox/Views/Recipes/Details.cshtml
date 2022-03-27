@@ -1,0 +1,46 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecipeBox.Models.Recipe
+
+<h2>Recipe Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.RecipeName): @Html.DisplayFor(model => model.RecipeName)</h3>
+<h5>@Html.DisplayNameFor(model => model.Ingredients): @Html.DisplayFor(model => model.Ingredients)</h5>
+<h5>@Html.DisplayNameFor(model => model.Instructions): @Html.DisplayFor(model => model.Instructions)</h5>
+
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This recipe does not have any tags</p>
+}
+else
+{
+  <h4>Tags for this recipe:</h4>
+  <ul>
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@join.Tag.Name</li>
+    @using (Html.BeginForm("DeleteTag", "Recipes"))
+    {
+      @Html.Hidden("joinId", @join.RecipeTagId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
+<h2>Add a rating to this recipe</h2>
+@using (Html.BeginForm("EditRating", "Recipes"))
+  { 
+    @Html.Hidden("RecipeId", @Model.RecipeId)
+    @Html.DropDownListFor(m => m.Rating, Enumerable.Range(1, 5).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+    <input type="submit" value="Save"/>
+  }
+
+<hr />
+
+<p>@Html.ActionLink("Add a Tag", "AddTag", new { id = Model.RecipeId })</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Edit Recipe", "Edit", new { id = Model.RecipeId })</p>
+<p>@Html.ActionLink("Delete Recipe", "Delete", new { id = Model.RecipeId })</p>
