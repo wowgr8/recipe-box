@@ -32,11 +32,14 @@ else
 }
 <h2>Add a rating to this recipe</h2>
 @using (Html.BeginForm("EditRating", "Recipes"))
-  { 
-    @Html.Hidden("RecipeId", @Model.RecipeId)
-    @Html.DropDownListFor(m => m.Rating, Enumerable.Range(1, 5).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
-    <input type="submit" value="Save"/>
-  }
+{ 
+  @Html.Hidden("RecipeId", @Model.RecipeId)
+  @Html.Hidden("RecipeName", @Model.RecipeName)
+  @Html.Hidden("Ingredients", @Model.Ingredients)
+  @Html.Hidden("Instructions", @Model.Instructions)
+  @Html.DropDownListFor(m => m.Rating, Enumerable.Range(1, 5).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+  <input type="submit" value="Save"/>
+}
 
 <hr />
 

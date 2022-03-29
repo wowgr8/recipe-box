@@ -34,6 +34,7 @@ namespace RecipeBox.Controllers
       return RedirectToAction("Index");
     }
 
+
     public ActionResult Details(int id)
     {
       var thisTag = _db.Tags

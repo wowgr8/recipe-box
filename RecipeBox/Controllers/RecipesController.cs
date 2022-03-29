@@ -72,7 +72,16 @@ namespace RecipeBox.Controllers
     [HttpPost]
     public ActionResult Edit(Recipe recipe, int TagId)
     {
-      if (TagId != 0)
+      ViewBag.model = _db.RecipeTag.ToList();
+      bool check = false;
+      foreach(var item in ViewBag.model)
+      {
+        if (TagId == item.TagId && recipe.RecipeId == item.RecipeId )
+        {
+          check = true;
+        }
+      }
+      if (check == false)
       {
         _db.RecipeTag.Add(new RecipeTag() { TagId = TagId, RecipeId = recipe.RecipeId });
       }
@@ -80,6 +89,8 @@ namespace RecipeBox.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    //loop viewbag.model if there isn't a number that = to TagId function this
 
     public ActionResult AddTag(int id)
     {
@@ -122,15 +133,10 @@ namespace RecipeBox.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    public ActionResult EditRating(int id)
-    {
-      var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
-      return View(thisRecipe);
-    }
 
     [HttpPost]
     public ActionResult EditRating(Recipe recipe, int rating)
-    {
+    {  
       _db.Entry(recipe).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
