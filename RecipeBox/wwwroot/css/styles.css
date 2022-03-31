@@ -1,0 +1,27 @@
+#logo {
+  font-family: 'Monoton', cursive;
+  color: rgb(230, 35, 201);
+  margin-right: 25%;
+}
+
+#title{
+  font-family: 'Monoton', cursive;
+  color: rgb(230, 35, 201)
+}
+
+#searchBar {
+  margin-left: 15%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: rgb(176, 214, 106);
+}
+
+.nav-link {
+  color: rgb(236, 54, 197);
+}
+
+hr {
+  margin-right: 10%;
+}

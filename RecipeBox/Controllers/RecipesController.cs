@@ -90,8 +90,6 @@ namespace RecipeBox.Controllers
       return RedirectToAction("Index");
     }
 
-    //loop viewbag.model if there isn't a number that = to TagId function this
-
     public ActionResult AddTag(int id)
     {
       var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);

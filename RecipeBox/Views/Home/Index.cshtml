@@ -1,8 +1,12 @@
 @{
   Layout = "_Layout";
 }
+<div class="container-fluid">
+  <div class="d-flex justify-content-center"> 
+    <h1 id="title" style="font-size:10vw">RECIPEBOX</h1>
+  </div>
+    <h5>Welcome to Recipe Box! The place where you can put your recipes in a box! Create an account below if you would like to contribute your recipes to THE BOX...</h5>
 
-<h1>Welcome to Recipe Box! The place where you can put your recipes in a box!</h1>
-<p>@Html.ActionLink("See all recipes", "Index", "Recipes")</p> 
-<p>@Html.ActionLink("See all tags", "Index", "Tags")</p>
-<p>@Html.ActionLink("Create an account", "Index", "Account")</p>
+    <p>@Html.ActionLink("Create an account", "Index", "Account",  null, new { id = "OT",style = "color: rgb(236, 54, 197);" })</p>
+    
+</div>
