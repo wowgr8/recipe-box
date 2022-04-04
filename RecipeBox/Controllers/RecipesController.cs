@@ -22,7 +22,6 @@ namespace RecipeBox.Controllers
       _userManager = userManager;
       _db = db;
     }
-
     public async Task<ActionResult> Index()
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -53,6 +52,7 @@ namespace RecipeBox.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisRecipe = _db.Recipes

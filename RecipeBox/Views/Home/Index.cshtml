@@ -1,6 +1,9 @@
 @{
   Layout = "_Layout";
 }
+
+@using RecipeBox.Models;
+
 <div class="container-fluid">
   <div class="d-flex justify-content-center"> 
     <h1 id="title" style="font-size:10vw">RECIPEBOX</h1>
@@ -8,5 +11,64 @@
     <h5>Welcome to Recipe Box! The place where you can put your recipes in a box! Create an account below if you would like to contribute your recipes to THE BOX...</h5>
 
     <p>@Html.ActionLink("Create an account", "Index", "Account",  null, new { id = "OT",style = "color: rgb(236, 54, 197);" })</p>
-    
+
+  <div class="row row-cols-2 row-cols-md-2 g-4">
+    @foreach (Recipe recipe in Model)
+    {
+      <div class="col">
+        <div class="card">
+          <div class="card-header">@Html.ActionLink($"{recipe.RecipeName}", "Details", "Recipes", new { id = recipe.RecipeId })</div>
+          <div class="card-body text-success">
+            <h5 class="card-title">Ingredients</h5>
+            <p class="card-text">
+            @recipe.Ingredients
+            </p>
+          </div>
+          <div class="card-footer">
+            <p>
+            @foreach(var join in recipe.JoinEntities)
+              {
+                @Html.ActionLink($"{join.Tag.Name}  ", "Details", "Tags", new { id = join.Tag.TagId })<text>&nbsp;&nbsp;&nbsp;</text> 
+              } 
+            </p>  
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+    <!-- <div class="row">
+      <div class="card border-success mx-5 mb-3" style="max-width: 18rem;">
+        <div class="card-header">Recipes</div>
+          <div class="card-body text-success">
+            <h5 class="card-title"></h5>
+            <p class="card-text">
+            <ul>
+              @foreach (Recipe recipe in Model)
+              {
+                <li>@Html.ActionLink($"{recipe.RecipeName}", "Details", "Recipes", new { id = recipe.RecipeId })</li>
+              }
+            </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card border-success mx-5 mb-3" style="max-width: 18rem;">
+        <div class="card-header">Tags</div>
+          <div class="card-body text-success">
+            <h5 class="card-title"></h5>
+            <p class="card-text">
+            <ul>
+              @foreach (Recipe recipe in Model)
+              {
+                @foreach(var join in recipe.JoinEntities)
+                {
+                  <li>@Html.ActionLink($"{join.Tag.Name}", "Details", "Tags", new { id = join.Tag.TagId })</li>
+                } 
+              }
+            </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div> -->
 </div>

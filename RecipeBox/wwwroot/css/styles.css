@@ -25,3 +25,7 @@ body {
 hr {
   margin-right: 10%;
 }
+
+#recipeCard {
+color: rgb(137, 218, 255);
+}
