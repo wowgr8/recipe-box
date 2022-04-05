@@ -72,17 +72,8 @@ namespace RecipeBox.Controllers
     [HttpPost]
     public ActionResult Edit(Recipe recipe, int TagId)
     {
-      ViewBag.model = _db.RecipeTag.ToList();
-      bool check = false;
-      foreach(var item in ViewBag.model)
-      {
-        if (TagId == item.TagId && recipe.RecipeId == item.RecipeId )
-        {
-          check = true;
-        }
-      }
-      if (check == false)
-      {
+      bool duplicate = _db.RecipeTag.Any(join => join.TagId == TagId && join.RecipeId == recipe.RecipeId);
+      if (TagId !=0 && !duplicate){
         _db.RecipeTag.Add(new RecipeTag() { TagId = TagId, RecipeId = recipe.RecipeId });
       }
       _db.Entry(recipe).State = EntityState.Modified;
